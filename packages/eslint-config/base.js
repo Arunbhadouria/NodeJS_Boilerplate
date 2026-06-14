@@ -4,15 +4,11 @@ import turboPlugin from "eslint-plugin-turbo";
 import tseslint from "typescript-eslint";
 import onlyWarn from "eslint-plugin-only-warn";
 
-/**
- * A shared ESLint configuration for the repository.
- *
- * @type {import("eslint").Linter.Config[]}
- * */
 export const config = [
   js.configs.recommended,
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
+
   {
     plugins: {
       turbo: turboPlugin,
@@ -21,12 +17,41 @@ export const config = [
       "turbo/no-undeclared-env-vars": "warn",
     },
   },
+
   {
-    plugins: {
-      onlyWarn,
+    plugins: { onlyWarn },
+  },
+
+  {
+    rules: {
+      // catch unhandled promises (critical in async Node.js)
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/no-misused-promises": "error",
+
+      // no any
+      "@typescript-eslint/no-explicit-any": "warn",
+
+      // no unused vars
+      "@typescript-eslint/no-unused-vars": "error",
+
+      // no console.log in production code
+      "no-console": "warn",
+
+      // no duplicate imports
+      "no-duplicate-imports": "error",
     },
   },
+
+  // relaxed for test files
   {
-    ignores: ["dist/**"],
+    files: ["**/*.test.ts", "**/*.spec.ts"],
+    rules: {
+      "@typescript-eslint/no-floating-promises": "off",
+      "no-console": "off",
+    },
+  },
+
+  {
+    ignores: ["dist/**", "node_modules/**", ".turbo/**"],
   },
 ];

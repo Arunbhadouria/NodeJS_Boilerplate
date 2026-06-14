@@ -1,0 +1,51 @@
+{
+  "name": "@boilerplate/api",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "check-types": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "migrations:new": "dbmate --migrations-dir ./src/db/migrations new",
+    "migrations:up": "dbmate --migrations-dir ./src/db/migrations up",
+    "migrations:down": "dbmate --migrations-dir ./src/db/migrations down",
+    "migrations:status": "dbmate --migrations-dir ./src/db/migrations status",
+    "tidy": "bun install && tsc --noEmit",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format:fix": "prettier --write src/",
+    "format:check": "prettier --check src/"
+  },
+  "dependencies": {
+    "@fastify/cors": "latest",
+    "@fastify/helmet": "latest",
+    "@sinclair/typebox": "latest",
+    "config": "latest",
+    "dotenv": "^17.4.2",
+    "fastify": "latest",
+    "pino": "^10.3.1",
+    "postgres": "latest",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@types/bun": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "dbmate": "^2.33.0",
+    "eslint": "^9.0.0",
+    "jest": "latest",
+    "nodemon": "latest",
+    "rimraf": "latest",
+    "testcontainers": "latest",
+    "ts-jest": "latest",
+    "tsx": "^4.22.4",
+    "typescript": "^5"
+  }
+}
