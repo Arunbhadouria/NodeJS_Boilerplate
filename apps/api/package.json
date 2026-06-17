@@ -26,11 +26,15 @@
     "@fastify/cors": "latest",
     "@fastify/helmet": "latest",
     "@sinclair/typebox": "latest",
+    "bullmq": "^5.78.1",
     "config": "latest",
     "dotenv": "^17.4.2",
     "fastify": "latest",
+    "handlebars": "^4.7.9",
+    "ioredis": "^5.11.1",
     "pino": "^10.3.1",
     "postgres": "latest",
+    "resend": "^6.12.4",
     "zod": "^4.4.3"
   },
   "devDependencies": {

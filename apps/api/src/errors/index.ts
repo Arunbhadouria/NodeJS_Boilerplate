@@ -1,7 +1,7 @@
 import { HttpError, makeUpperCaseWithUnderscores, type FieldError, type Action } from "./http.error";
 export * from "./http.error";
 
-export function newUnauthrizedError(message: string, override = false) {
+export function newUnauthorizedError(message: string, override = false) {
     return new HttpError({
         code: makeUpperCaseWithUnderscores("Unauthorized"),
         message,
