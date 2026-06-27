@@ -25,6 +25,7 @@
   "dependencies": {
     "@fastify/cors": "latest",
     "@fastify/helmet": "latest",
+    "@fastify/jwt": "latest",
     "@sinclair/typebox": "latest",
     "bullmq": "^5.78.1",
     "config": "latest",
@@ -51,5 +52,9 @@
     "ts-jest": "latest",
     "tsx": "^4.22.4",
     "typescript": "^5"
+  },
+
+  "resolutions": {
+
   }
 }

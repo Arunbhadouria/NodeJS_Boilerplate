@@ -6,7 +6,12 @@ import {getLogLevel, type ObservabilityConfig } from "../config";
 // This lets us attach a traceId once per request, and every
 // log call within that request automatically includes it.
 type RequestContext = {
-  traceID: string
+  traceID: string,
+  method: string,
+  path: string,
+  ip: string,
+  userId?: string,
+  userRole?: string,
 };
 
 export const requestContext = new AsyncLocalStorage<RequestContext>();
@@ -26,7 +31,14 @@ export function initLogger(cfg: ObservabilityConfig): Logger {
     // mixin runs on every log call - injects traceId if present
     mixin() {
       const ctx = requestContext.getStore();
-      return ctx ? { traceID: ctx.traceID } : {};
+      return ctx ? { 
+        traceID: ctx.traceID,
+        method : ctx.method,
+        path : ctx.path,
+        ip : ctx.ip,
+        ...(ctx.userId && {userId : ctx.userId}),
+        ...(ctx.userRole && {userRole : ctx.userRole}),
+       } : {};
     },
     transport: isProduction
       ? undefined
