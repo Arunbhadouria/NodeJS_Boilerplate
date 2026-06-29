@@ -7,6 +7,9 @@ import { JobService } from "../lib/job";
 import { requestMiddleware } from "../middlewares/request_id.middleware";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { registerRateLimit } from "../middlewares/rate_limit.middleware";
+import { registerRequestLogger, registerErrorHandler } from "../middlewares/global.middleware";
+import cors from "@fastify/cors";
+import helmet from "@fastify/helmet";
 
 export interface AppServer {
   app: FastifyInstance;
@@ -49,9 +52,16 @@ export async function createServer(config: Config, logger: Logger): Promise<AppS
     requestTimeout: config.server.readTimeout * 1000,
   });
 
-  app.addHook("onRequest", requestMiddleware);
+  await app.register(cors, {
+    origin: config.server.corsAllowedOrigins,
+  });
+  await app.register(helmet);
 
   await registerRateLimit(app);
+  app.addHook("onRequest", requestMiddleware);
+
+  registerRequestLogger(app);
+  registerErrorHandler(app);
 
   app.get("/health", async (request, reply) => {
     return reply.status(200).send({ status: "ok" });

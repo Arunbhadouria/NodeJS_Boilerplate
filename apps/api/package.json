@@ -23,8 +23,8 @@
     "format:check": "prettier --check src/"
   },
   "dependencies": {
-    "@fastify/cors": "latest",
-    "@fastify/helmet": "latest",
+    "@fastify/cors": "^11.2.0",
+    "@fastify/helmet": "^13.0.2",
     "@fastify/jwt": "latest",
     "@fastify/rate-limit": "^11.0.0",
     "@sinclair/typebox": "latest",
@@ -32,6 +32,7 @@
     "config": "latest",
     "dotenv": "^17.4.2",
     "fastify": "latest",
+    "fastify-plugin": "^6.0.0",
     "handlebars": "^4.7.9",
     "ioredis": "^5.11.1",
     "pino": "^10.3.1",
