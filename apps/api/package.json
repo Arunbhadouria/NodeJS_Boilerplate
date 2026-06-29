@@ -26,6 +26,7 @@
     "@fastify/cors": "latest",
     "@fastify/helmet": "latest",
     "@fastify/jwt": "latest",
+    "@fastify/rate-limit": "^11.0.0",
     "@sinclair/typebox": "latest",
     "bullmq": "^5.78.1",
     "config": "latest",
@@ -53,8 +54,5 @@
     "tsx": "^4.22.4",
     "typescript": "^5"
   },
-
-  "resolutions": {
-
-  }
+  "resolutions": {}
 }

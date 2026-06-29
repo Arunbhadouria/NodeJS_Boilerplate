@@ -6,6 +6,7 @@ import { createDatabase, connect as connectDb, close as closeDb, type Database }
 import { JobService } from "../lib/job";
 import { requestMiddleware } from "../middlewares/request_id.middleware";
 import { requireAuth } from "../middlewares/auth.middleware";
+import { registerRateLimit } from "../middlewares/rate_limit.middleware";
 
 export interface AppServer {
   app: FastifyInstance;
@@ -49,6 +50,8 @@ export async function createServer(config: Config, logger: Logger): Promise<AppS
   });
 
   app.addHook("onRequest", requestMiddleware);
+
+  await registerRateLimit(app);
 
   app.get("/health", async (request, reply) => {
     return reply.status(200).send({ status: "ok" });
